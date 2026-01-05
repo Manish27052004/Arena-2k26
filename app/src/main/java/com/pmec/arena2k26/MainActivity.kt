@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.pmec.arena2k26.ui.organiserHomeScreen.CreateMatchScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.OrgHomeScreen
 import com.pmec.arena2k26.ui.theme.Arena2k26Theme
 
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Arena2k26Theme {
-                OrgHomeScreen()
+                CreateMatchScreen()
             }
         }
     }
