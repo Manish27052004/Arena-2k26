@@ -8,6 +8,7 @@ import com.pmec.arena2k26.models.Team
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class CreateMatchViewModel : ViewModel() {
@@ -18,25 +19,22 @@ class CreateMatchViewModel : ViewModel() {
     val uiState: StateFlow<CreateMatchUiState> = _uiState.asStateFlow()
 
     init {
-        fetchInitialData()
-    }
-
-    private fun fetchInitialData() {
+        // Start listening to the real-time flows from the repository
         viewModelScope.launch {
-            val teams = repository.getTeams()
-            val matches = repository.getMatches()
-            _uiState.value = _uiState.value.copy(
-                allTeams = teams,
-                allPreviousMatches = matches,
-                isLoading = false
-            )
+            // Combine the two flows, so that we get an update whenever either of them changes
+            combine(repository.getTeamsFlow(), repository.getMatchesFlow()) { teams, matches ->
+                CreateMatchUiState(allTeams = teams, allPreviousMatches = matches, isLoading = false)
+            }.collect { newState ->
+                _uiState.value = newState
+            }
         }
     }
 
     fun createMatch(match: Match) {
         viewModelScope.launch {
             val success = repository.createMatch(match)
-            // You can expose a state to the UI to show a success/error message
+            // No need to manually refresh the list.
+            // The snapshot listener will automatically update the uiState.
         }
     }
 }

@@ -1,31 +1,32 @@
 package com.pmec.arena2k26.data.repository
 
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
-
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.snapshots
+import com.google.firebase.ktx.Firebase
 import com.pmec.arena2k26.models.Match
 import com.pmec.arena2k26.models.Team
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 
 class MatchRepository {
 
     private val db = Firebase.firestore
 
-    suspend fun getMatches(): List<Match> {
-        return try {
-            db.collection("matches").get().await().toObjects(Match::class.java)
-        } catch (e: Exception) {
-            // In a real app, you'd want to handle this error gracefully
-            emptyList()
-        }
+    // Returns a real-time flow of matches
+    fun getMatchesFlow(): Flow<List<Match>> {
+        return db.collection("matches").snapshots()
+            .map { snapshot ->
+                snapshot.toObjects(Match::class.java)
+            }
     }
 
-    suspend fun getTeams(): List<Team> {
-        return try {
-            db.collection("teams").get().await().toObjects(Team::class.java)
-        } catch (e: Exception) {
-            emptyList()
-        }
+    // Returns a real-time flow of teams
+    fun getTeamsFlow(): Flow<List<Team>> {
+        return db.collection("teams").snapshots()
+            .map { snapshot ->
+                snapshot.toObjects(Team::class.java)
+            }
     }
 
     suspend fun createMatch(match: Match): Boolean {

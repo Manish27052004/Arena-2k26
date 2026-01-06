@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.pmec.arena2k26" />
+                  <option name="mobileSdkAppId" value="1:535985645944:android:6d44ae484ecb501a62408d" />
+                  <option name="projectId" value="arena-2k26" />
+                  <option name="projectNumber" value="535985645944" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
