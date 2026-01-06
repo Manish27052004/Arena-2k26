@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "535985645944",
+    "project_id": "arena-2k26",
+    "storage_bucket": "arena-2k26.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535985645944:android:6d44ae484ecb501a62408d",
+        "android_client_info": {
+          "package_name": "com.pmec.arena2k26"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYaQY3gbijVoqu8qlaJTpeQHUgMR43dRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
