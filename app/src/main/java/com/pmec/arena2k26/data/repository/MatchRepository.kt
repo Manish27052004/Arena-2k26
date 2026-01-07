@@ -13,7 +13,6 @@ class MatchRepository {
 
     private val db = Firebase.firestore
 
-    // Returns a real-time flow of matches
     fun getMatchesFlow(): Flow<List<Match>> {
         return db.collection("matches").snapshots()
             .map { snapshot ->
@@ -21,7 +20,6 @@ class MatchRepository {
             }
     }
 
-    // Returns a real-time flow of teams
     fun getTeamsFlow(): Flow<List<Team>> {
         return db.collection("teams").snapshots()
             .map { snapshot ->
@@ -32,6 +30,17 @@ class MatchRepository {
     suspend fun createMatch(match: Match): Boolean {
         return try {
             db.collection("matches").add(match).await()
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    // Function to update an existing match document
+    suspend fun updateMatch(match: Match): Boolean {
+        return try {
+            // Use the match's ID to find the document and set its new data
+            db.collection("matches").document(match.id).set(match).await()
             true
         } catch (e: Exception) {
             false

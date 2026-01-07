@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,9 +19,11 @@ import androidx.compose.ui.unit.dp
 import com.pmec.arena2k26.models.Match
 import com.pmec.arena2k26.ui.theme.Arena2k26Theme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchCard(match: Match) {
+fun MatchCard(match: Match, onClick: () -> Unit) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
@@ -29,7 +32,6 @@ fun MatchCard(match: Match) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             // Main title section for better visual hierarchy
-
             Text(
                 text = match.matchName.ifEmpty { "No Name" },
                 style = MaterialTheme.typography.headlineSmall, // Use a larger style for the match name
@@ -58,7 +60,6 @@ fun MatchCard(match: Match) {
 @Composable
 fun MatchCardPreview() {
     Arena2k26Theme {
-        // Preview with a valid Match object constructor
-        MatchCard(match = Match(matchName = "Qualifiers Day 1", venue = "Main Auditorium", date = "20/10/2024", time = "10:00", status = "Upcoming"))
+        MatchCard(match = Match(matchName = "Qualifiers Day 1", venue = "Main Auditorium", date = "20/10/2024", time = "10:00", status = "Upcoming"), onClick = {})
     }
 }

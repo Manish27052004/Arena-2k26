@@ -42,7 +42,8 @@ import com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel.CreateMatchViewModel
 @Composable
 fun OrgHomeScreen(
     viewModel: CreateMatchViewModel = viewModel(),
-    onNavigateToCreateMatch: () -> Unit
+    onNavigateToCreateMatch: () -> Unit,
+    onMatchClick: (String) -> Unit // New navigation callback
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var expanded by remember { mutableStateOf(false) }
@@ -124,7 +125,10 @@ fun OrgHomeScreen(
                     .padding(horizontal = 8.dp)
             ) {
                 items(uiState.allPreviousMatches) { match ->
-                    MatchCard(match = match)
+                    MatchCard(
+                        match = match,
+                        onClick = { onMatchClick(match.id) } // Trigger navigation with the match ID
+                    )
                 }
             }
         }
@@ -135,6 +139,5 @@ fun OrgHomeScreen(
 @Composable
 fun OrgHomeScreenPreview() {
     // This preview will show the loading state by default.
-    // To preview with data, you would need a more complex setup with a fake ViewModel.
-    OrgHomeScreen(onNavigateToCreateMatch = {})
+    OrgHomeScreen(onNavigateToCreateMatch = {}, onMatchClick = {})
 }
