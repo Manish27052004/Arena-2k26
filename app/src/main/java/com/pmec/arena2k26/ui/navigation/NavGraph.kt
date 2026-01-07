@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.pmec.arena2k26.ui.auth.LoginScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.CreateMatchScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.MatchDetailsScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.OrgHomeScreen
@@ -17,7 +18,16 @@ fun NavGraph() {
     val navController = rememberNavController()
     val viewModel: CreateMatchViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = Routes.ORG_HOME_SCREEN) {
+    NavHost(navController = navController, startDestination = Routes.LOGIN_SCREEN) {
+        composable(Routes.LOGIN_SCREEN) {
+            LoginScreen(onLoginClicked = {
+                // For now, just navigate to the home screen
+                navController.navigate(Routes.ORG_HOME_SCREEN) {
+                    // Prevent going back to the login screen
+                    popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
+                }
+            })
+        }
         composable(Routes.ORG_HOME_SCREEN) {
             OrgHomeScreen(
                 viewModel = viewModel,
@@ -38,7 +48,6 @@ fun NavGraph() {
             arguments = listOf(navArgument(Routes.ARG_MATCH_ID) { type = NavType.StringType })
         ) {
             val matchId = it.arguments?.getString(Routes.ARG_MATCH_ID) ?: ""
-            // Set the selected match in the ViewModel before showing the screen
             viewModel.getMatchById(matchId)
             MatchDetailsScreen(viewModel = viewModel)
         }
