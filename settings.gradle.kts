@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Arena 2k26"
 include(":app")
+include(":user")
+
