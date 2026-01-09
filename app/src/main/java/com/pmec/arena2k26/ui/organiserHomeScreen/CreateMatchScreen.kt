@@ -48,11 +48,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.pmec.arena2k26.models.Match
-import com.pmec.arena2k26.models.Team
-import com.pmec.arena2k26.models.TeamSelection
+import com.pmec.arena2k26.core.models.Match
+import com.pmec.arena2k26.core.models.Team
+import com.pmec.arena2k26.core.models.TeamSelection
+import com.pmec.arena2k26.core.ui.theme.Arena2k26Theme
 import com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel.CreateMatchViewModel
-import com.pmec.arena2k26.ui.theme.Arena2k26Theme
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -106,9 +106,8 @@ fun CreateMatchScreen(
                     onClick = {
                         showDatePicker = false
                         datePickerState.selectedDateMillis?.let { millis ->
-                            val selectedDate = Calendar.getInstance().apply { timeInMillis = millis }
                             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                            date = sdf.format(selectedDate.time)
+                            date = sdf.format(Calendar.getInstance().apply { timeInMillis = millis }.time)
                         }
                     },
                     enabled = datePickerState.selectedDateMillis != null
@@ -125,12 +124,7 @@ fun CreateMatchScreen(
             title = { Text("Select Time") },
             text = { Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) { TimePicker(state = timePickerState) } },
             confirmButton = {
-                TextButton(
-                    onClick = {
-                        showTimePicker = false
-                        time = "${timePickerState.hour}:${timePickerState.minute}"
-                    }
-                ) { Text("OK") }
+                TextButton(onClick = { showTimePicker = false; time = "${timePickerState.hour}:${timePickerState.minute}" }) { Text("OK") }
             },
             dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text("Cancel") } }
         )
@@ -170,7 +164,7 @@ fun CreateMatchScreen(
                 }
 
                 item { Divider(Modifier.padding(vertical = 8.dp)) }
-                item { Text("Participant Selection", style = MaterialTheme. typography.titleMedium) }
+                item { Text("Participant Selection", style = MaterialTheme.typography.titleMedium) }
 
                 item {
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {

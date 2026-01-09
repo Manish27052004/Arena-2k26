@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.pmec.arena2k26.core.ui.theme.Arena2k26Theme
 import com.pmec.arena2k26.ui.navigation.NavGraph
-import com.pmec.arena2k26.ui.theme.Arena2k26Theme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

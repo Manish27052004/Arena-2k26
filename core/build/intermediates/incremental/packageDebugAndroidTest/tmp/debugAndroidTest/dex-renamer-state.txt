@@ -1,0 +1,19 @@
+#Fri Jan 09 22:12:56 IST 2026
+base.0=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
+base.1=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeLibDexDebugAndroidTest\\14\\classes.dex
+base.2=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeLibDexDebugAndroidTest\\2\\classes.dex
+base.3=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+base.4=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes2.dex
+base.5=D\:\\\#MyAndroidProjects\\Arena2k26\\core\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes3.dex
+path.0=classes.dex
+path.1=14/classes.dex
+path.2=2/classes.dex
+path.3=0/classes.dex
+path.4=classes2.dex
+path.5=classes3.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex
+renamed.4=classes5.dex
+renamed.5=classes6.dex

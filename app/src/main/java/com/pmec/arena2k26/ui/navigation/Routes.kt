@@ -2,6 +2,7 @@ package com.pmec.arena2k26.ui.navigation
 
 object Routes {
     const val LOGIN_SCREEN = "login_screen"
+    const val REGISTER_SCREEN = "register_screen"
     const val ORG_HOME_SCREEN = "org_home_screen"
     const val CREATE_MATCH_SCREEN = "create_match_screen"
     const val MATCH_DETAILS_SCREEN = "match_details_screen/{matchId}" // Dynamic route

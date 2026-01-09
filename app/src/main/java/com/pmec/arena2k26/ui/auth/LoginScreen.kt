@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -22,10 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pmec.arena2k26.ui.theme.Arena2k26Theme
+
 
 @Composable
-fun LoginScreen(onLoginClicked: () -> Unit) {
+fun LoginScreen(
+    onLoginClicked: () -> Unit,
+    onRegisterClicked: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -59,19 +63,19 @@ fun LoginScreen(onLoginClicked: () -> Unit) {
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(
-                onClick = { onLoginClicked() }, // For now, this just triggers the navigation
+                onClick = { onLoginClicked() },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Login")
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedButton(
+                onClick = { onRegisterClicked() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Register a New Team")
             }
         }
     }
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun LoginScreenPreview() {
-    Arena2k26Theme {
-        LoginScreen(onLoginClicked = {})
-    }
-}

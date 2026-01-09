@@ -51,7 +51,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.pmec.arena2k26.models.Match
+import com.pmec.arena2k26.core.models.Match
 import com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel.CreateMatchViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar

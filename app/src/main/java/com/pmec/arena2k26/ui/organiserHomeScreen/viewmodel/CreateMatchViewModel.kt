@@ -3,8 +3,8 @@ package com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pmec.arena2k26.data.repository.MatchRepository
-import com.pmec.arena2k26.models.Match
-import com.pmec.arena2k26.models.Team
+import com.pmec.arena2k26.core.models.Match
+import com.pmec.arena2k26.core.models.Team
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

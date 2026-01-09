@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pmec.arena2k26.models.Match
-import com.pmec.arena2k26.ui.theme.Arena2k26Theme
+import com.pmec.arena2k26.core.models.Match
+import com.pmec.arena2k26.core.ui.theme.Arena2k26Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.compose")
 
     kotlin("plugin.serialization") version "1.9.22"
 
@@ -47,6 +47,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+    implementation(project(":user"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

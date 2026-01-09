@@ -12,6 +12,7 @@ import com.pmec.arena2k26.ui.organiserHomeScreen.CreateMatchScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.MatchDetailsScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.OrgHomeScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel.CreateMatchViewModel
+import com.pmec.arena2k26.user.ui.auth.RegisterScreen
 
 @Composable
 fun NavGraph() {
@@ -20,12 +21,21 @@ fun NavGraph() {
 
     NavHost(navController = navController, startDestination = Routes.LOGIN_SCREEN) {
         composable(Routes.LOGIN_SCREEN) {
-            LoginScreen(onLoginClicked = {
-                // For now, just navigate to the home screen
-                navController.navigate(Routes.ORG_HOME_SCREEN) {
-                    // Prevent going back to the login screen
-                    popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
+            LoginScreen(
+                onLoginClicked = {
+                    navController.navigate(Routes.ORG_HOME_SCREEN) {
+                        popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
+                    }
+                },
+                onRegisterClicked = {
+                    navController.navigate(Routes.REGISTER_SCREEN)
                 }
+            )
+        }
+        composable(Routes.REGISTER_SCREEN) {
+            RegisterScreen(onRegistrationComplete = {
+                // Go back to the login screen after successful registration
+                navController.popBackStack()
             })
         }
         composable(Routes.ORG_HOME_SCREEN) {

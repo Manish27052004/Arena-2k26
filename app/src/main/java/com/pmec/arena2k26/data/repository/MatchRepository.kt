@@ -3,8 +3,8 @@ package com.pmec.arena2k26.data.repository
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.snapshots
 import com.google.firebase.ktx.Firebase
-import com.pmec.arena2k26.models.Match
-import com.pmec.arena2k26.models.Team
+import com.pmec.arena2k26.core.models.Match
+import com.pmec.arena2k26.core.models.Team
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await

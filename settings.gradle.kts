@@ -1,12 +1,6 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -18,8 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
 rootProject.name = "Arena 2k26"
 include(":app")
 include(":user")
-
+include(":core")

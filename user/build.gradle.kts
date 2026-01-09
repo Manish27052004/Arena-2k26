@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -39,12 +40,16 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    // Need to depend on the main app's theme
-    implementation(project(":app"))
+    // Firebase - versions are managed by the :app module's BOM
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 }
