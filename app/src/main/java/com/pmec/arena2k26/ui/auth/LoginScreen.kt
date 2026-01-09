@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,23 +20,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
 
 @Composable
 fun LoginScreen(
-    onLoginClicked: () -> Unit,
-    onRegisterClicked: () -> Unit
+    onNavigateToUserHome: (String) -> Unit,
+    onNavigateToOrgHome: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    Scaffold {
+    Scaffold { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(padding)
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -47,9 +45,13 @@ fun LoginScreen(
 
             TextField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = { 
+                    email = it
+                    errorMessage = null 
+                },
                 label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                isError = errorMessage != null
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -60,22 +62,43 @@ fun LoginScreen(
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth()
             )
+            
+            if (errorMessage != null) {
+                Text(
+                    text = errorMessage!!,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(
-                onClick = { onLoginClicked() },
+                onClick = {
+                    val parts = email.split("@")
+                    if (parts.size == 2) {
+                        val name = parts[0]
+                        val domain = parts[1]
+                        
+                        when {
+                            domain == "pmec.ac.in" -> {
+                                onNavigateToUserHome(name)
+                            }
+                            domain in listOf("badminton.pmec", "cricket.pmec", "tabletennis.pmec", "badminton", "cricket", "tabletennis") -> {
+                                onNavigateToOrgHome()
+                            }
+                            else -> {
+                                errorMessage = "Invalid domain. Use official college or coordinator ID."
+                            }
+                        }
+                    } else {
+                        errorMessage = "Please enter a valid email address."
+                    }
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Login")
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedButton(
-                onClick = { onRegisterClicked() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Register a New Team")
-            }
         }
     }
 }
-

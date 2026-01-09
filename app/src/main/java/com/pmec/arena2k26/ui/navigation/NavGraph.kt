@@ -13,6 +13,7 @@ import com.pmec.arena2k26.ui.organiserHomeScreen.MatchDetailsScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.OrgHomeScreen
 import com.pmec.arena2k26.ui.organiserHomeScreen.viewmodel.CreateMatchViewModel
 import com.pmec.arena2k26.user.ui.auth.RegisterScreen
+import com.pmec.arena2k26.user.ui.userHomeScreen.UserHomeScreen
 
 @Composable
 fun NavGraph() {
@@ -22,21 +23,31 @@ fun NavGraph() {
     NavHost(navController = navController, startDestination = Routes.LOGIN_SCREEN) {
         composable(Routes.LOGIN_SCREEN) {
             LoginScreen(
-                onLoginClicked = {
-                    navController.navigate(Routes.ORG_HOME_SCREEN) {
+                onNavigateToUserHome = { userName ->
+                    navController.navigate(Routes.userHome(userName)) {
                         popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
                     }
                 },
-                onRegisterClicked = {
-                    navController.navigate(Routes.REGISTER_SCREEN)
+                onNavigateToOrgHome = {
+                    navController.navigate(Routes.ORG_HOME_SCREEN) {
+                        popUpTo(Routes.LOGIN_SCREEN) { inclusive = true }
+                    }
                 }
             )
         }
         composable(Routes.REGISTER_SCREEN) {
             RegisterScreen(onRegistrationComplete = {
-                // Go back to the login screen after successful registration
                 navController.popBackStack()
             })
+        }
+        composable(Routes.USER_HOME_SCREEN, arguments = listOf(navArgument(Routes.ARG_USER_NAME) { type = NavType.StringType })) {
+            val userName = it.arguments?.getString(Routes.ARG_USER_NAME) ?: ""
+            UserHomeScreen(
+                userName = userName,
+                onNavigateToRegister = {
+                    navController.navigate(Routes.REGISTER_SCREEN)
+                }
+            )
         }
         composable(Routes.ORG_HOME_SCREEN) {
             OrgHomeScreen(
